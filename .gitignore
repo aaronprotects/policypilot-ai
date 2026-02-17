@@ -1,5 +1,26 @@
-.venv
+# Secrets
 .env
-ragdb/
+.env.*
+
+# Never commit local python envs
+.venv/
+venv/
+env/
+
+# Python cache
 __pycache__/
 *.pyc
+.pytest_cache/
+
+# OS
+.DS_Store
+
+# Local backup assets (do not commit)
+private_assets/
+
+# Extracted text artifacts (derived from proprietary PDFs)
+out_med_pages/
+extracted_rows.txt
+
+# Vector DBs (optional; keep out unless you REALLY want them in repo)
+# rag/

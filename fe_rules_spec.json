@@ -1,0 +1,4377 @@
+{
+  "meta": {
+    "name": "Final Expense Grid Rule Spec",
+    "source": "Whole Life Underwriting Guidelines grid + Master Decision Tree",
+    "notes": "This file is the canonical truth source. Code should not hardcode carrier decisions."
+  },
+  "conditions": {
+    "DIABETES": {
+      "inputs": [
+        "age",
+        "age_at_diagnosis",
+        "insulin_use"
+      ],
+      "rules": [
+        {
+          "when": {
+            "age_at_diagnosis_lte": 50
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: Diabetes diagnosed/treated prior to age 50 -> Graded (MOO column)"
+            }
+          }
+        },
+        {
+          "when": {
+            "insulin_use": true,
+            "age_at_diagnosis_lte": 50
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: Insulin prior to age 50 -> ROP (American Amicable column)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: DIABETES row"
+      ]
+    },
+    "DIABETIC_COMPLICATIONS": {
+      "inputs": [
+        "complications"
+      ],
+      "rules": [
+        {
+          "when": {
+            "complications_any": [
+              "amputation"
+            ]
+          },
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: Amputation due to diabetes -> Decline (Aetna column under complications)"
+            },
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: Due to diabetes -> Decline (American Amicable column under complications)"
+            }
+          }
+        },
+        {
+          "when": {
+            "complications_any": [
+              "insulin_shock",
+              "diabetic_coma"
+            ]
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: Insulin shock / diabetic coma -> Decline (MOO Living Promise column under complications)"
+            }
+          }
+        },
+        {
+          "when": {
+            "complications_any": [
+              "retinopathy",
+              "nephropathy",
+              "neuropathy"
+            ]
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: Retinopathy/Nephropathy/Neuropathy -> Modified (Aetna column under complications)"
+            },
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: Retinopathy/Nephropathy/Neuropathy -> Graded (MOO column under complications)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: DIABETIC COMPLICATIONS row"
+      ]
+    },
+    "AIDS_HIV_ARC": {
+      "inputs": [],
+      "rules": [
+        {
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: AIDS/HIV/ARC -> Decline (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: AIDS/HIV/ARC -> Decline (AmAm)"
+            },
+            "Americo": {
+              "tier": "DECLINE",
+              "why": "Grid: AIDS/HIV/ARC -> Decline (Americo)"
+            },
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: AIDS/HIV/ARC -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: AIDS/HIV/ARC -> Decline (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: AIDS/HIV/ARC -> Decline (MOO)"
+            },
+            "Transamerica": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: AIDS/HIV/ARC -> Allowed (Question-Based) (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: AIDS/HIV/ARC row"
+      ]
+    },
+    "ALS_LOU_GEHRIGS": {
+      "inputs": [],
+      "rules": [
+        {
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: ALS -> Decline (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: ALS -> Decline (AmAm)"
+            },
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: ALS -> Guaranteed Issue (Americo)"
+            },
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: ALS -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: ALS -> Decline (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: ALS -> Decline (MOO)"
+            },
+            "Transamerica": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: ALS -> Allowed (Question-Based) (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: ALS row"
+      ]
+    },
+    "ALZHEIMERS___DEMENTIA___MEMORY_LOSS___COGNITIVE": {
+      "inputs": [],
+      "rules": [
+        {
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: Alzheimer\u2019s/Dementia -> Decline (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: Alzheimer\u2019s/Dementia -> Decline (AmAm)"
+            },
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: Alzheimer\u2019s/Dementia -> Guaranteed Issue (Americo)"
+            },
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: Alzheimer\u2019s/Dementia -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: Alzheimer\u2019s/Dementia -> Decline (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: Alzheimer\u2019s/Dementia -> Decline (MOO)"
+            },
+            "Transamerica": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: Alzheimer\u2019s/Dementia -> Allowed (Question-Based) (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: Alzheimer\u2019s/Dementia row"
+      ]
+    },
+    "AFIB___ATRIAL_FIBRILLATION___IRREGULAR_HEARTBEAT": {
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: AFIB within 2 yrs -> Graded (MOO)"
+            }
+          }
+        },
+        {
+          "when": {
+            "years_since_event_gt": 2
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "SELECT",
+              "why": "Grid: AFIB beyond 2 yrs -> Select (MOO)"
+            }
+          }
+        },
+        {
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: AFIB not asked/allowed (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: AFIB not asked/allowed (AmAm)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: AFIB not asked/allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "GRADED",
+              "why": "Grid: AFIB -> Graded (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: AFIB -> Allowed (Question-Based) (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: AFIB -> Select (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: AFIB row"
+      ]
+    },
+    "AFIB___ATRIAL_FIBRILLATION__IRREGULAR_HEARTBEAT": {
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: AFIB within 2 yrs -> Graded (MOO)"
+            }
+          }
+        },
+        {
+          "when": {
+            "years_since_event_gt": 2
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "SELECT",
+              "why": "Grid: AFIB beyond 2 yrs -> Select (MOO)"
+            }
+          }
+        },
+        {
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: AFIB not asked/allowed (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: AFIB not asked/allowed (AmAm)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: AFIB not asked/allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "GRADED",
+              "why": "Grid: AFIB -> Graded (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: AFIB -> Allowed (Question-Based) (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: AFIB -> Select (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: AFIB row"
+      ]
+    },
+    "ALCOHOL___DRUG_ABUSE": {
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: Alcohol/Drug abuse -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: Alcohol/Drug abuse -> Allowed (Question-Based) (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: Alcohol/Drug abuse -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: Alcohol/Drug abuse treatment within 2 yrs -> Modified (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: Alcohol/Drug abuse treated within 2 yrs -> ROP (AmAm)"
+            },
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: Alcohol/Drug abuse within 2 yrs -> Guaranteed Issue (Americo)"
+            },
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: Alcohol/Drug abuse within 2 yrs -> Graded (MOO)"
+            },
+            "Transamerica": {
+              "tier": "GRADED",
+              "why": "Grid: Alcohol/Drug abuse within 2 yrs -> Graded (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: ALCOHOL / DRUG ABUSE row"
+      ]
+    },
+    "COPD": {
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: COPD -> Standard (Aetna)"
+            },
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: COPD -> Guaranteed Issue (Americo)"
+            },
+            "Corebridge": {
+              "tier": "GRADED",
+              "why": "Grid: COPD -> Graded (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: COPD -> Allowed (Question-Based) (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: COPD -> Graded (MOO)"
+            },
+            "Transamerica": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: COPD -> Allowed (Question-Based) (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: COPD treated within 2 yrs -> ROP (AmAm)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GRADED",
+              "why": "Grid: COPD within 3 yrs -> Graded (AmAm)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: COPD row"
+      ]
+    },
+    "CONGESTIVE_HEART_FAILURE___HEART_FAILURE_DIASTOLIC_HEART_FAILURE": {
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: CHF -> Decline (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: CHF -> Decline (AmAm)"
+            },
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: CHF -> Guaranteed Issue (Americo)"
+            },
+            "Corebridge": {
+              "tier": "GRADED",
+              "why": "Grid: CHF -> Graded (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: CHF -> Allowed (Question-Based) (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: CHF -> Decline (MOO)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: CHF -> Select (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: CHF row"
+      ]
+    },
+    "STROKE___TIA_ATTACK": {
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Corebridge": {
+              "tier": "GRADED",
+              "why": "Grid: Stroke/TIA -> Graded (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: Stroke/TIA -> Decline (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: Stroke/TIA within 2 yrs -> Graded (MOO)"
+            },
+            "Transamerica": {
+              "tier": "GRADED",
+              "why": "Grid: Stroke/TIA -> Graded (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: Stroke/TIA within 1 yr -> Modified (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: Stroke/TIA within 2 yrs -> ROP (AmAm)"
+            },
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: Stroke/TIA within 1 yr -> Guaranteed Issue (Americo)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: Stroke/TIA 1\u20132 yrs -> Standard (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: Stroke/TIA within 2 yrs -> ROP (AmAm)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: STROKE / TIA row"
+      ]
+    },
+    "CANCER_OTHER_THAN_BASAL_CELL": {
+      "inputs": [
+        "years_since_event",
+        "current",
+        "recurring",
+        "metastatic",
+        "never_treated"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: Cancer other than basal cell -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: Cancer other than basal cell -> Decline (Ethos)"
+            }
+          }
+        },
+        {
+          "priority": 20,
+          "when": {
+            "flag_true": "current"
+          },
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: Current cancer -> Decline (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: Current cancer -> Decline (AmAm)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: <2 yrs / metastatic / recurring -> Decline (MOO)"
+            }
+          }
+        },
+        {
+          "priority": 19,
+          "when": {
+            "flag_true": "recurring"
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: Recurring/within 2 yrs -> ROP (AmAm)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: Metastatic/Recurring -> Decline (MOO)"
+            }
+          }
+        },
+        {
+          "priority": 18,
+          "when": {
+            "flag_true": "metastatic"
+          },
+          "set": {
+            "Americo": {
+              "tier": "DECLINE",
+              "why": "Grid: Metastatic/Recurrent -> Decline (Americo)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: Metastatic -> Decline (MOO)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: Treated within 2 yrs -> Decline (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: Within 2 yrs -> ROP (AmAm)"
+            },
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: Within 2 yrs -> Guaranteed Issue (Americo)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: <2 yrs -> Decline (MOO)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GRADED",
+              "why": "Grid: Within 3 yrs -> Graded (AmAm)"
+            }
+          }
+        },
+        {
+          "priority": 8,
+          "when": {
+            "years_since_event_lte": 4
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: 2\u20134 yrs -> Graded (MOO)"
+            }
+          }
+        },
+        {
+          "priority": 7,
+          "when": {
+            "years_since_event_gt": 4
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "LEVEL",
+              "why": "Grid: >4 yrs -> Allowed (MOO)"
+            },
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: >2 yrs -> Preferred (Aetna)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: CANCER (OTHER THAN BASAL CELL) row"
+      ]
+    },
+    "OXYGEN": {
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: Oxygen -> Decline (Aetna) (CPAP OK)"
+            },
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: Oxygen -> Decline (AmAm)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: Oxygen -> Decline (MOO)"
+            },
+            "Corebridge": {
+              "tier": "GRADED",
+              "why": "Grid: Oxygen -> Graded (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: Oxygen -> Allowed (Question-Based) (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: Oxygen -> Allowed (Question-Based) (Transamerica)"
+            },
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: Oxygen -> Guaranteed Issue (Americo)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 0.5
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: Oxygen within 6 mos -> Guaranteed Issue (Americo)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: OXYGEN row"
+      ]
+    },
+    "AMPUTATION": {
+      "status": "COMPLETE",
+      "label": "AMPUTATION",
+      "inputs": [
+        "cause"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: AMPUTATION -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: AMPUTATION -> Allowed (Question-Based) (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: AMPUTATION -> Allowed (Question-Based) (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 1,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: AMPUTATION -> Modified (Aetna) unless due to disease/diabetes"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "flag_true": "cause_is_disease_or_diabetes"
+          },
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: AMPUTATION due to any disease or Diabetes -> DECLINE (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "flag_true": "cause_is_disease"
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: AMPUTATION caused by disease -> DECLINE (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "flag_true": "cause_is_diabetes"
+          },
+          "set": {
+            "Americo": {
+              "tier": "DECLINE",
+              "why": "Grid: AMPUTATION due to Diabetes -> DECLINE (Americo)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: AMPUTATION due to Diabetes -> DECLINE (Mutual of Omaha)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: AMPUTATION row (LlamaParse extract)"
+      ]
+    },
+    "ANEURYSM": {
+      "status": "COMPLETE",
+      "label": "ANEURYSM",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: ANEURYSM -> Not asked - allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: ANEURYSM -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: ANEURYSM -> Allowed (Question-Based) (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: ANEURYSM -> Not Allowed - asked (MOO)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: ANEURYSM -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: ANEURYSM Within 1 Year - Modified (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: ANEURYSM Within 2 yrs - ROP (American Amicable)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: ANEURYSM row (LlamaParse extract)"
+      ]
+    },
+    "ANGINA_CHEST_PAIN": {
+      "status": "COMPLETE",
+      "label": "ANGINA (CHEST PAIN)",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: ANGINA -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: ANGINA -> Allowed (Ethos)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: ANGINA -> Modified (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: ANGINA between 1\u20132 years -> Standard (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 8,
+          "when": {
+            "years_since_event_gt": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: ANGINA >2 years -> Preferred (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: ANGINA within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: ANGINA within 1 yr -> Guaranteed Issue (Americo)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: ANGINA within 1 yr -> Decline (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "SELECT",
+              "why": "Grid: ANGINA within 2 yrs -> Select (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Transamerica": {
+              "tier": "GRADED",
+              "why": "Grid: ANGINA within 2 yrs -> Graded (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: ANGINA (CHEST PAIN) row (LlamaParse extract)"
+      ]
+    },
+    "ANGIOPLASTY": {
+      "status": "COMPLETE",
+      "label": "ANGIOPLASTY",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: ANGIOPLASTY -> See Heart Surgery (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: ANGIOPLASTY -> Not asked - Allowed (American Amicable)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: ANGIOPLASTY -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: ANGIOPLASTY -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: ANGIOPLASTY -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: ANGIOPLASTY within 1 yr -> Guaranteed Issue (Americo)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: ANGIOPLASTY within 1 yr -> Decline (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: ANGIOPLASTY within 2 yrs -> Graded (Mutual of Omaha)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: ANGIOPLASTY row (LlamaParse extract)"
+      ]
+    },
+    "ARTHRITIS": {
+      "status": "COMPLETE",
+      "label": "ARTHRITIS",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: ARTHRITIS -> Not asked - Allowed (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: ARTHRITIS -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: ARTHRITIS -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: ARTHRITIS -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: ARTHRITIS -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: ARTHRITIS -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: ARTHRITIS -> Select (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: ARTHRITIS row (LlamaParse extract)"
+      ]
+    },
+    "ASSISTED_LIVING___LONG_TERM_CARE_FACILITY": {
+      "status": "COMPLETE",
+      "label": "ASSISTED LIVING / LONG TERM CARE FACILITY",
+      "inputs": [
+        "currently_in_facility",
+        "months_since"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: Assisted living/LTC -> Decline (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: Assisted living/LTC -> Decline (American Amicable)"
+            },
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: Assisted living/LTC -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: Assisted living/LTC -> Decline (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: Assisted living/LTC current -> Decline (MOO)"
+            },
+            "Transamerica": {
+              "tier": "DECLINE",
+              "why": "Grid: Assisted living/LTC current -> Decline (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "months_since_lte": 6
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: Assisted living within 6 months -> Guaranteed Issue (Americo)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: Assisted Living/LTC row (LlamaParse extract)"
+      ]
+    },
+    "ASTHMA_CHRONIC": {
+      "status": "COMPLETE",
+      "label": "ASTHMA (CHRONIC)",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: ASTHMA (CHRONIC) -> Standard (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: ASTHMA (CHRONIC) -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: ASTHMA (CHRONIC) -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: ASTHMA (CHRONIC) -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: ASTHMA (CHRONIC) -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: ASTHMA (CHRONIC) -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: ASTHMA (CHRONIC) -> Select (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: ASTHMA (CHRONIC) row (LlamaParse extract)"
+      ]
+    },
+    "AUTISM": {
+      "status": "COMPLETE",
+      "label": "AUTISM",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: AUTISM -> See Mental Incapacity (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: AUTISM -> Not asked (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: AUTISM -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: AUTISM -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: AUTISM -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: AUTISM -> Decline (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: AUTISM -> Select (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: AUTISM row (LlamaParse extract)"
+      ]
+    },
+    "BIPOLAR": {
+      "status": "COMPLETE",
+      "label": "BIPOLAR",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: BIPOLAR -> Preferred (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: BIPOLAR -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: BIPOLAR -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: BIPOLAR -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: BIPOLAR -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: BIPOLAR -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 4
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: BIPOLAR within 4 yrs -> Graded (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_gt": 4
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "LEVEL",
+              "why": "Grid: BIPOLAR not within 4 yrs -> Allowed (Mutual of Omaha)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: BIPOLAR row (LlamaParse extract)"
+      ]
+    },
+    "BLACK_LUNG": {
+      "status": "COMPLETE",
+      "label": "BLACK LUNG",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: BLACK LUNG -> Not asked - allowed (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: BLACK LUNG -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: BLACK LUNG -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: BLACK LUNG -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: BLACK LUNG -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: BLACK LUNG -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: BLACK LUNG -> Select (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: BLACK LUNG row (LlamaParse extract)"
+      ]
+    },
+    "BLOOD_CLOTS": {
+      "status": "COMPLETE",
+      "label": "BLOOD CLOTS",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: BLOOD CLOTS -> Not asked (ask about stents) (Aetna)"
+            },
+            "Americo": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: BLOOD CLOTS -> See stent / check med list (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: BLOOD CLOTS -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: BLOOD CLOTS -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: BLOOD CLOTS -> See stent (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: BLOOD CLOTS -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: BLOOD CLOTS surgical procedure within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: BLOOD CLOTS row (LlamaParse extract)"
+      ]
+    },
+    "BONE_MARROW_TRANSPLANT": {
+      "status": "COMPLETE",
+      "label": "BONE MARROW TRANSPLANT",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: BONE MARROW TRANSPLANT -> Decline (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: BONE MARROW TRANSPLANT -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: BONE MARROW TRANSPLANT -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: BONE MARROW TRANSPLANT -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: BONE MARROW TRANSPLANT -> Decline (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: BONE MARROW TRANSPLANT -> Decline (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: BONE MARROW TRANSPLANT -> Allowed (Question-Based) (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: BONE MARROW TRANSPLANT row (LlamaParse extract)"
+      ]
+    },
+    "BRONCHITIS_CHRONIC": {
+      "status": "COMPLETE",
+      "label": "BRONCHITIS (CHRONIC)",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: BRONCHITIS (CHRONIC) -> Standard (Aetna)"
+            },
+            "Americo": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: BRONCHITIS (CHRONIC) -> Not asked - check inhalers/meds (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: BRONCHITIS (CHRONIC) -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: BRONCHITIS (CHRONIC) -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: BRONCHITIS (CHRONIC) -> Graded (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: BRONCHITIS (CHRONIC) -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: BRONCHITIS (CHRONIC) treated within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: BRONCHITIS (CHRONIC) row (LlamaParse extract)"
+      ]
+    },
+    "CEREBRAL_PALSY": {
+      "status": "COMPLETE",
+      "label": "CEREBRAL PALSY",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: CEREBRAL PALSY -> Decline (Aetna)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: CEREBRAL PALSY -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: CEREBRAL PALSY -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: CEREBRAL PALSY -> Decline (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: CEREBRAL PALSY -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "DECLINE",
+              "why": "Grid: CEREBRAL PALSY -> Decline (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GRADED",
+              "why": "Grid: CEREBRAL PALSY diagnosed/treated within 3 yrs -> Graded (American Amicable)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: CEREBRAL PALSY row (LlamaParse extract)"
+      ]
+    },
+    "CHRONIC_PAIN_6_OR_MORE_FILLS_OF_NARCOTIC_PAIN_PRESCRIPTIONS": {
+      "status": "COMPLETE",
+      "label": "CHRONIC PAIN (6 OR MORE FILLS OF NARCOTIC PAIN PRESCRIPTIONS)",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: CHRONIC PAIN -> Check meds (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: CHRONIC PAIN -> Check med list - see neuropathy (American Amicable)"
+            },
+            "Americo": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: CHRONIC PAIN -> Check med list (Americo)"
+            },
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: CHRONIC PAIN -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: CHRONIC PAIN -> Decline (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: CHRONIC PAIN -> Check med list (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "LEVEL",
+              "why": "Grid: CHRONIC PAIN -> Allowed (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: CHRONIC PAIN row (LlamaParse extract)"
+      ]
+    },
+    "CIRRHOSIS": {
+      "status": "COMPLETE",
+      "label": "CIRRHOSIS",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: CIRRHOSIS -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: CIRRHOSIS -> (Question-Based) (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: CIRRHOSIS -> Decline (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "GRADED",
+              "why": "Grid: CIRRHOSIS -> Graded (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: CIRRHOSIS treated within 2 years -> Modified (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: CIRRHOSIS treated within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: CIRRHOSIS within 3 years -> Guaranteed Issue (Americo)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: CIRRHOSIS row (LlamaParse extract)"
+      ]
+    },
+    "CORONARY_ARTERY_DISEASE": {
+      "status": "COMPLETE",
+      "label": "CORONARY ARTERY DISEASE",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: CORONARY ARTERY DISEASE -> See Heart Disease (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: CORONARY ARTERY DISEASE -> ROP (American Amicable)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: CORONARY ARTERY DISEASE -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: CORONARY ARTERY DISEASE -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: CORONARY ARTERY DISEASE -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: CORONARY ARTERY DISEASE within 1 yr -> Guaranteed Issue (Americo)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: CORONARY ARTERY DISEASE within 1 yr -> Decline (Mutual of Omaha)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: CORONARY ARTERY DISEASE row (LlamaParse extract)"
+      ]
+    },
+    "CROHNS_DISEASE": {
+      "status": "COMPLETE",
+      "label": "CROHN'S DISEASE",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: CROHN'S DISEASE -> Not asked (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: CROHN'S DISEASE -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "LEVEL",
+              "why": "Grid: CROHN'S DISEASE -> Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: CROHN'S DISEASE -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: CROHN'S DISEASE -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: CROHN'S DISEASE -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: CROHN'S DISEASE -> Select (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: CROHN'S DISEASE row (LlamaParse extract)"
+      ]
+    },
+    "CYSTIC_FIBROSIS": {
+      "status": "COMPLETE",
+      "label": "CYSTIC FIBROSIS",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: CYSTIC FIBROSIS -> Decline (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: CYSTIC FIBROSIS -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: CYSTIC FIBROSIS -> Guaranteed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: CYSTIC FIBROSIS -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: CYSTIC FIBROSIS -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: CYSTIC FIBROSIS -> Graded (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "DECLINE",
+              "why": "Grid: CYSTIC FIBROSIS -> Decline (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: CYSTIC FIBROSIS row (LlamaParse extract)"
+      ]
+    },
+    "DEMENTIA": {
+      "status": "COMPLETE",
+      "label": "DEMENTIA",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: DEMENTIA -> Decline (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: DEMENTIA -> Decline (American Amicable)"
+            },
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: DEMENTIA -> Guaranteed Issue (Americo)"
+            },
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: DEMENTIA -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: DEMENTIA -> Decline (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: DEMENTIA -> Decline (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "DECLINE",
+              "why": "Grid: DEMENTIA -> Decline (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: DEMENTIA row (LlamaParse extract)"
+      ]
+    },
+    "DEPRESSION": {
+      "status": "COMPLETE",
+      "label": "DEPRESSION",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: DEPRESSION -> Not asked (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: DEPRESSION -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: DEPRESSION -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: DEPRESSION -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: DEPRESSION -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: DEPRESSION -> Note references bipolar; treat as needs review (MOO)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: DEPRESSION row (LlamaParse extract)"
+      ]
+    },
+    "DIALYSIS": {
+      "status": "COMPLETE",
+      "label": "DIALYSIS",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Americo": {
+              "tier": "DECLINE",
+              "why": "Grid: DIALYSIS -> Decline (Americo)"
+            },
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: DIALYSIS -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: DIALYSIS -> Decline (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: DIALYSIS -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: DIALYSIS within 1 year -> Decline (Aetna)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: DIALYSIS within 12 months -> Decline (MOO)"
+            },
+            "American Amicable": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: Kidney Dialysis -> Guaranteed Issue (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_gt": 1
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: DIALYSIS after 12 months -> Graded (MOO)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: DIALYSIS row (LlamaParse extract)"
+      ]
+    },
+    "DOWNS_SYNDROME": {
+      "status": "COMPLETE",
+      "label": "DOWN'S SYNDROME",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: DOWN'S SYNDROME -> See Mental Incapacity (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: DOWN'S SYNDROME -> See Mental Incapacity (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: DOWN'S SYNDROME -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: DOWN'S SYNDROME -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: DOWN'S SYNDROME -> Allowed (Question-Based) (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: DOWN'S SYNDROME -> Decline (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "DECLINE",
+              "why": "Grid: DOWN'S SYNDROME -> Decline (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: DOWN'S SYNDROME row (LlamaParse extract)"
+      ]
+    },
+    "DUI": {
+      "status": "COMPLETE",
+      "label": "DUI",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: DUI -> Not asked - allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: DUI -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: DUI -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: DUI -> Allowed (Question-Based) (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: DUI -> Not asked - allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: DUI -> Allowed (Question-Based) (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: DUI within 2 years -> Modified (Aetna)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: DUI row (LlamaParse extract)"
+      ]
+    },
+    "EMPHYSEMA_CHRONIC": {
+      "status": "COMPLETE",
+      "label": "EMPHYSEMA (CHRONIC)",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: EMPHYSEMA (CHRONIC) -> Standard (Aetna)"
+            },
+            "Americo": {
+              "tier": "GRADED",
+              "why": "Grid: EMPHYSEMA (CHRONIC) -> Graded (Question-Based) (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: EMPHYSEMA (CHRONIC) -> Allowed (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "GRADED",
+              "why": "Grid: EMPHYSEMA (CHRONIC) -> Graded (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "SELECT",
+              "why": "Grid: EMPHYSEMA (CHRONIC) -> Select (MOO)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: EMPHYSEMA (CHRONIC) treated within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: EMPHYSEMA (CHRONIC) within 3 years -> Guaranteed Issue (American Amicable)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: EMPHYSEMA (CHRONIC) row (LlamaParse extract)"
+      ]
+    },
+    "EPILEPSY_SEIZURES": {
+      "status": "COMPLETE",
+      "label": "EPILEPSY/SEIZURES",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: EPILEPSY/SEIZURES -> Not asked (Aetna)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: EPILEPSY/SEIZURES -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: EPILEPSY/SEIZURES -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: EPILEPSY/SEIZURES -> Allowed (Question-Based) (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: EPILEPSY/SEIZURES -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: EPILEPSY/SEIZURES -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GRADED",
+              "why": "Grid: EPILEPSY/SEIZURES within 3 years -> Graded (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_gt": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "LEVEL",
+              "why": "Grid: EPILEPSY/SEIZURES not within 3 years -> Allowed (American Amicable)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: EPILEPSY/SEIZURES row (LlamaParse extract)"
+      ]
+    },
+    "FELONY": {
+      "status": "COMPLETE",
+      "label": "FELONY",
+      "inputs": [
+        "years_since_event",
+        "awaiting_trial"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: FELONY -> Not asked (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: FELONY -> Not asked - Allowed (American Amicable)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: FELONY -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: FELONY -> Allowed (Question-Based) (Ethos)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 0.5
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: FELONY within 6 months -> Guaranteed Issue (Americo)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: FELONY convicted within 2 years -> Graded (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "flag_true": "awaiting_trial"
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: FELONY awaiting trial -> Graded (Mutual of Omaha)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: FELONY row (LlamaParse extract)"
+      ]
+    },
+    "HEART_ATTACK": {
+      "status": "COMPLETE",
+      "label": "HEART ATTACK",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: HEART ATTACK -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: HEART ATTACK -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: HEART ATTACK -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: HEART ATTACK within 1 year -> Modified (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: HEART ATTACK between 1\u20132 years -> Standard (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 8,
+          "when": {
+            "years_since_event_gt": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: HEART ATTACK >2 years -> Preferred (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: HEART ATTACK within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GRADED",
+              "why": "Grid: HEART ATTACK within 3 yrs -> Graded (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: HEART ATTACK within 1 yr -> Guaranteed Issue (Americo)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: HEART ATTACK within 1 yr -> Decline (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: HEART ATTACK within 2 yrs -> Graded (Mutual of Omaha)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: HEART ATTACK row (LlamaParse extract)"
+      ]
+    },
+    "HEART_SURGERY": {
+      "status": "COMPLETE",
+      "label": "HEART SURGERY",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: HEART SURGERY -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: HEART SURGERY -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: HEART SURGERY -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: HEART SURGERY within 1 year -> Modified (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: HEART SURGERY between 1\u20132 years -> Standard (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 8,
+          "when": {
+            "years_since_event_gt": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: HEART SURGERY >2 years -> Preferred (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: HEART SURGERY within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GRADED",
+              "why": "Grid: HEART SURGERY within 3 yrs -> Graded (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: HEART SURGERY within 1 yr -> Guaranteed Issue (Americo)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: HEART SURGERY within 1 yr -> Decline (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: HEART SURGERY within 2 yrs -> Graded (Mutual of Omaha)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: HEART SURGERY row (LlamaParse extract)"
+      ]
+    },
+    "HEART_VALVE_REPLACEMENT": {
+      "status": "COMPLETE",
+      "label": "HEART VALVE REPLACEMENT",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: HEART VALVE REPLACEMENT -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: HEART VALVE REPLACEMENT -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: HEART VALVE REPLACEMENT -> Allowed (Question-Based) (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: HEART VALVE REPLACEMENT within 1 year -> Modified (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: HEART VALVE REPLACEMENT between 1\u20132 years -> Standard (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 8,
+          "when": {
+            "years_since_event_gt": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: HEART VALVE REPLACEMENT >2 years -> Preferred (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: HEART VALVE REPLACEMENT within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GRADED",
+              "why": "Grid: HEART VALVE REPLACEMENT within 3 yrs -> Graded (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: HEART VALVE REPLACEMENT within 1 yr -> Guaranteed Issue (Americo)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: HEART VALVE REPLACEMENT within 1 yr -> Decline (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: HEART VALVE REPLACEMENT within 2 yrs -> Graded (Mutual of Omaha)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: HEART VALVE REPLACEMENT row (LlamaParse extract)"
+      ]
+    },
+    "HEPATITIS_A": {
+      "status": "COMPLETE",
+      "label": "HEPATITIS A",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Americo": {
+              "tier": "LEVEL",
+              "why": "Grid: HEPATITIS A -> Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: HEPATITIS A -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: HEPATITIS A -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: HEPATITIS A -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: HEPATITIS A -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: HEPATITIS A within 2 years -> Modified (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: HEPATITIS A chronic/treated within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: HEPATITIS A row (LlamaParse extract)"
+      ]
+    },
+    "HEPATITIS_B": {
+      "status": "COMPLETE",
+      "label": "HEPATITIS B",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: HEPATITIS B -> Guaranteed Issue (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: HEPATITIS B -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: HEPATITIS B -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: HEPATITIS B -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: HEPATITIS B -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: HEPATITIS B within 2 years -> Modified (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: HEPATITIS B chronic/treated within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: HEPATITIS B row (LlamaParse extract)"
+      ]
+    },
+    "HEPATITIS_C": {
+      "status": "COMPLETE",
+      "label": "HEPATITIS C",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: HEPATITIS C -> Guaranteed Issue (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: HEPATITIS C -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: HEPATITIS C -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: HEPATITIS C -> Graded (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: HEPATITIS C -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: HEPATITIS C within 2 years -> Modified (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: HEPATITIS C chronic/treated within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GRADED",
+              "why": "Grid: HEPATITIS C within 3 yrs -> Graded (American Amicable)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: HEPATITIS C row (LlamaParse extract)"
+      ]
+    },
+    "HUNTINGTONS_DISEASE": {
+      "status": "COMPLETE",
+      "label": "HUNTINGTON'S DISEASE",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: HUNTINGTON'S DISEASE -> Decline (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: HUNTINGTON'S DISEASE -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: HUNTINGTON'S DISEASE -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: HUNTINGTON'S DISEASE -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: HUNTINGTON'S DISEASE -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: HUNTINGTON'S DISEASE -> Decline (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "DECLINE",
+              "why": "Grid: HUNTINGTON'S DISEASE -> Decline (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: HUNTINGTON'S DISEASE row (LlamaParse extract)"
+      ]
+    },
+    "IRREGULAR_HEARTBEAT": {
+      "status": "COMPLETE",
+      "label": "IRREGULAR HEARTBEAT",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: IRREGULAR HEARTBEAT -> Not asked - allowed (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: IRREGULAR HEARTBEAT -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: IRREGULAR HEARTBEAT -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: IRREGULAR HEARTBEAT -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: IRREGULAR HEARTBEAT -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: IRREGULAR HEARTBEAT -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: IRREGULAR HEARTBEAT within 2 yrs -> Graded (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_gt": 2
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "LEVEL",
+              "why": "Grid: IRREGULAR HEARTBEAT not within 2 yrs -> Allowed (Mutual of Omaha)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: IRREGULAR HEARTBEAT row (LlamaParse extract)"
+      ]
+    },
+    "ILLEGAL_DRUGS": {
+      "status": "COMPLETE",
+      "label": "ILLEGAL DRUGS",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: ILLEGAL DRUGS -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: ILLEGAL DRUGS -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: ILLEGAL DRUGS -> (Question-Based) (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: ILLEGAL DRUGS treatment within 2 years -> Modified (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: ILLEGAL DRUGS used within 2 years -> ROP (American Amicable)"
+            },
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: ILLEGAL DRUGS within 2 yrs -> Guaranteed Issue (Americo)"
+            },
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: ILLEGAL DRUGS within 2 yrs -> Graded (Mutual of Omaha)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: ILLEGAL DRUGS row (LlamaParse extract)"
+      ]
+    },
+    "JAIL___INCARCERATED": {
+      "status": "COMPLETE",
+      "label": "JAIL / INCARCERATED",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: JAIL / INCARCERATED -> Not asked (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: JAIL / INCARCERATED -> Decline (American Amicable)"
+            },
+            "Americo": {
+              "tier": "DECLINE",
+              "why": "Grid: JAIL / INCARCERATED -> Decline (Americo)"
+            },
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: JAIL / INCARCERATED -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: JAIL / INCARCERATED -> Decline (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: JAIL / INCARCERATED -> Decline (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "LEVEL",
+              "why": "Grid: JAIL / INCARCERATED -> Allowed (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: JAIL / INCARCERATED row (LlamaParse extract)"
+      ]
+    },
+    "KIDNEY_DISEASE___DISORDER___FAILURE_ALSO_SEE_DIALYSIS": {
+      "status": "COMPLETE",
+      "label": "KIDNEY DISEASE / DISORDER / FAILURE (ALSO SEE DIALYSIS)",
+      "inputs": [
+        "subtype"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "GRADED",
+              "why": "Grid: KIDNEY DISEASE -> Graded (also see dialysis) (Aetna)"
+            },
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: KIDNEY DISEASE -> Guaranteed Issue (Americo)"
+            },
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: KIDNEY DISEASE -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: KIDNEY DISEASE -> Decline (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: KIDNEY DISEASE -> Decline (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: KIDNEY DISEASE -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "flag_true": "subtype_is_dialysis"
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: KIDNEY DISEASE dialysis -> Decline (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "flag_true": "subtype_is_failure_or_disease"
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: KIDNEY DISEASE failure/disease -> ROP (American Amicable)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: KIDNEY DISEASE row (LlamaParse extract)"
+      ]
+    },
+    "LIVER_DISEASE": {
+      "status": "COMPLETE",
+      "label": "LIVER DISEASE",
+      "inputs": [
+        "years_since_event",
+        "has_cirrhosis"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "GRADED",
+              "why": "Grid: LIVER DISEASE -> Graded (Aetna)"
+            },
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: LIVER DISEASE -> Guaranteed Issue (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: LIVER DISEASE -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: LIVER DISEASE -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: LIVER DISEASE -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "flag_true": "has_cirrhosis"
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: LIVER DISEASE cirrhosis -> Decline (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GRADED",
+              "why": "Grid: LIVER DISEASE within 3 yrs -> Graded (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_gt": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: LIVER DISEASE -> Decline (American Amicable)"
+            },
+            "Mutual of Omaha": {
+              "tier": "LEVEL",
+              "why": "Grid: LIVER DISEASE (no cirrhosis) -> not explicitly declined (MOO) [needs further row context]"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: LIVER DISEASE row (LlamaParse extract)"
+      ]
+    },
+    "LUPUS_SYSTEMIC_LUPUS_ERYTHEMATOSUS": {
+      "status": "COMPLETE",
+      "label": "LUPUS (SYSTEMIC LUPUS ERYTHEMATOSUS)",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "GRADED",
+              "why": "Grid: LUPUS (SYSTEMIC) -> Graded (Aetna)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: LUPUS (SYSTEMIC) -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: LUPUS (SYSTEMIC) -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: LUPUS (SYSTEMIC) -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: LUPUS (SYSTEMIC) -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: LUPUS treated/diagnosed within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_gt": 0
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: LUPUS within 4 yrs + systemic -> Graded (Mutual of Omaha) [use <=4 in practice]"
+            }
+          }
+        },
+        {
+          "priority": 11,
+          "when": {
+            "years_since_event_lte": 4
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: LUPUS within 4 yrs + systemic -> Graded (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_gt": 4
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "LEVEL",
+              "why": "Grid: LUPUS beyond 4 yrs -> allowed (not explicitly restricted)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: LUPUS row (LlamaParse extract)"
+      ]
+    },
+    "MELANOMA": {
+      "status": "COMPLETE",
+      "label": "MELANOMA",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: MELANOMA -> Modified (Aetna) (note: excludes basal/squamous cell skin cancer)"
+            },
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: MELANOMA -> See Cancer Malignant - Decline (American Amicable)"
+            },
+            "Americo": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: MELANOMA -> Level (Question-Based) (Americo)"
+            },
+            "Corebridge": {
+              "tier": "LEVEL",
+              "why": "Grid: MELANOMA -> Allowed (Corebridge)"
+            },
+            "Mutual of Omaha": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: MELANOMA -> (Question-Based) (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "LEVEL",
+              "why": "Grid: MELANOMA -> Allowed (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 4
+          },
+          "set": {
+            "Ethos": {
+              "tier": "GRADED",
+              "why": "Grid: MELANOMA within 4 yrs -> Graded (Ethos)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_gt": 4
+          },
+          "set": {
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: MELANOMA -> Decline (Ethos) unless within 4 yrs graded per grid note"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: MELANOMA row (LlamaParse extract)"
+      ]
+    },
+    "MENTAL_INCAPACITY___RETARDATION": {
+      "status": "COMPLETE",
+      "label": "MENTAL INCAPACITY / RETARDATION",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "GRADED",
+              "why": "Grid: MENTAL INCAPACITY -> Graded (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: MENTAL INCAPACITY -> Decline (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: MENTAL INCAPACITY -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: MENTAL INCAPACITY -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: MENTAL INCAPACITY -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: MENTAL INCAPACITY -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "DECLINE",
+              "why": "Grid: MENTAL INCAPACITY -> Decline (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: MENTAL INCAPACITY row (LlamaParse extract)"
+      ]
+    },
+    "MULTIPLE_SCLEROSIS_MS": {
+      "status": "COMPLETE",
+      "label": "MULTIPLE SCLEROSIS (MS)",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: MS -> Not asked (Aetna)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: MS -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: MS -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: MS -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: MS -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GRADED",
+              "why": "Grid: MS diagnosed/treated within 3 yrs -> Graded (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 4
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: MS within 4 yrs -> Graded (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_gt": 4
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "LEVEL",
+              "why": "Grid: MS beyond 4 yrs -> allowed (not explicitly restricted)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: MULTIPLE SCLEROSIS (MS) row (LlamaParse extract)"
+      ]
+    },
+    "NEUROPATHY": {
+      "status": "COMPLETE",
+      "label": "NEUROPATHY",
+      "inputs": [
+        "is_diabetes_related",
+        "age_at_diagnosis",
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: NEUROPATHY -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: NEUROPATHY -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: NEUROPATHY -> Select (Transamerica)"
+            },
+            "American Amicable": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: NEUROPATHY not due to diabetes -> see med list (American Amicable)"
+            },
+            "Americo": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: NEUROPATHY not associated with diabetes -> see med list (Americo)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "flag_true": "is_diabetes_related"
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: NEUROPATHY due to diabetes -> Modified (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "age_at_diagnosis_lt": 50
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: NEUROPATHY due to diabetes prior to age 50 -> Graded (MOO)"
+            },
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: NEUROPATHY due to diabetes prior to age 50 -> ROP (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "flag_true": "is_diabetes_related"
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: NEUROPATHY due to diabetes / treated w/in 2 yrs -> Guaranteed Issue (Americo)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {},
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "LEVEL",
+              "why": "Grid: NEUROPATHY not due to diabetes -> allowed (MOO)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: NEUROPATHY row (LlamaParse extract)"
+      ]
+    },
+    "PACEMAKER___DEFIBRILLATOR_IMPLANT": {
+      "status": "COMPLETE",
+      "label": "PACEMAKER / DEFIBRILLATOR IMPLANT",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Americo": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: PACEMAKER/DEFIB -> Level (Question-Based) (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: PACEMAKER/DEFIB -> Allowed but check meds/heart conditions (Corebridge)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: PACEMAKER/DEFIB -> Decline (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 1
+          },
+          "set": {
+            "Aetna": {
+              "tier": "MODIFIED",
+              "why": "Grid: PACEMAKER/DEFIB within 1 year -> Modified (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: PACEMAKER/DEFIB between 1\u20132 years -> Standard (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 8,
+          "when": {
+            "years_since_event_gt": 2
+          },
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: PACEMAKER/DEFIB >2 years -> Preferred (Aetna)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: PACEMAKER/DEFIB received within 2 years -> Guaranteed Issue (American Amicable)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: PACEMAKER / DEFIBRILLATOR IMPLANT row (LlamaParse extract)"
+      ]
+    },
+    "PANCREATITIS": {
+      "status": "COMPLETE",
+      "label": "PANCREATITIS",
+      "inputs": [
+        "years_since_event",
+        "is_chronic"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: PANCREATITIS -> Not asked (Aetna)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: PANCREATITIS -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: PANCREATITIS -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: PANCREATITIS -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: PANCREATITIS -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "GRADED",
+              "why": "Grid: PANCREATITIS -> Graded (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "flag_true": "is_chronic"
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: PANCREATITIS chronic / treated within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "ROP",
+              "why": "Grid: PANCREATITIS treated within 2 yrs -> ROP (American Amicable)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: PANCREATITIS row (LlamaParse extract)"
+      ]
+    },
+    "PARKINSONS_DISEASE": {
+      "status": "COMPLETE",
+      "label": "PARKINSON'S DISEASE",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: PARKINSON'S -> Standard (Aetna)"
+            },
+            "Americo": {
+              "tier": "LEVEL",
+              "why": "Grid: PARKINSON'S -> Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: PARKINSON'S -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: PARKINSON'S -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: PARKINSON'S -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GRADED",
+              "why": "Grid: PARKINSON'S treated/diagnosed within 3 yrs -> Graded (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 4
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: PARKINSON'S within 4 yrs -> Graded (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_gt": 4
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "LEVEL",
+              "why": "Grid: PARKINSON'S beyond 4 yrs -> allowed (not explicitly restricted)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: PARKINSON'S DISEASE row (LlamaParse extract)"
+      ]
+    },
+    "PAROLE___PROBATION_CURRENTLY": {
+      "status": "COMPLETE",
+      "label": "PAROLE / PROBATION (CURRENTLY)",
+      "inputs": [
+        "years_since_event",
+        "awaiting_trial"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: PAROLE/PROBATION (CURRENTLY) -> Not asked (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: PAROLE/PROBATION (CURRENTLY) -> Not asked (American Amicable)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: PAROLE/PROBATION (CURRENTLY) -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: PAROLE/PROBATION (CURRENTLY) -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: PAROLE/PROBATION (CURRENTLY) -> (Question-Based) (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 0.5
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: PAROLE/PROBATION within 6 months -> Guaranteed Issue (Americo)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 2
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: PAROLE/PROBATION 2 yrs convicted -> Graded (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "flag_true": "awaiting_trial"
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: PAROLE/PROBATION awaiting trial -> Graded (Mutual of Omaha)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: PAROLE / PROBATION row (LlamaParse extract)"
+      ]
+    },
+    "PAD___PVD": {
+      "status": "COMPLETE",
+      "label": "PAD / PVD",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: PAD/PVD -> Not asked (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: PAD/PVD -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: PAD/PVD -> Not asked - allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: PAD/PVD -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: PAD/PVD -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: PAD/PVD -> Graded (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "LEVEL",
+              "why": "Grid: PAD/PVD -> Allowed (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: PAD / PVD row (LlamaParse extract)"
+      ]
+    },
+    "PTSD": {
+      "status": "COMPLETE",
+      "label": "PTSD",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: PTSD -> Not asked (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: PTSD -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "LEVEL",
+              "why": "Grid: PTSD -> Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: PTSD -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: PTSD -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: PTSD -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "LEVEL",
+              "why": "Grid: PTSD -> Allowed (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: PTSD row (LlamaParse extract)"
+      ]
+    },
+    "PULMONARY_FIBROSIS": {
+      "status": "COMPLETE",
+      "label": "PULMONARY FIBROSIS",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: PULMONARY FIBROSIS -> Decline (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: PULMONARY FIBROSIS -> Ask about oxygen (American Amicable)"
+            },
+            "Americo": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: PULMONARY FIBROSIS -> Ask about oxygen (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: PULMONARY FIBROSIS -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: PULMONARY FIBROSIS -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: PULMONARY FIBROSIS -> Ask about oxygen (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "DECLINE",
+              "why": "Grid: PULMONARY FIBROSIS -> Decline (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: PULMONARY FIBROSIS row (LlamaParse extract)"
+      ]
+    },
+    "RHEUMATOID_ARTHRITIS": {
+      "status": "COMPLETE",
+      "label": "RHEUMATOID ARTHRITIS",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: RHEUMATOID ARTHRITIS -> Not asked (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: RHEUMATOID ARTHRITIS -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: RHEUMATOID ARTHRITIS -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: RHEUMATOID ARTHRITIS -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: RHEUMATOID ARTHRITIS -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: RHEUMATOID ARTHRITIS -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: RHEUMATOID ARTHRITIS -> Select (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: RHEUMATOID ARTHRITIS row (LlamaParse extract)"
+      ]
+    },
+    "SARCOIDOSIS": {
+      "status": "COMPLETE",
+      "label": "SARCOIDOSIS",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: SARCOIDOSIS -> Not asked (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: SARCOIDOSIS -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: SARCOIDOSIS -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "DECLINE",
+              "why": "Grid: SARCOIDOSIS -> Decline (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "DECLINE",
+              "why": "Grid: SARCOIDOSIS -> Decline (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: SARCOIDOSIS -> Graded (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "LEVEL",
+              "why": "Grid: SARCOIDOSIS -> Allowed (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: SARCOIDOSIS row (LlamaParse extract)"
+      ]
+    },
+    "SCHIZOPHRENIA": {
+      "status": "COMPLETE",
+      "label": "SCHIZOPHRENIA",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "LEVEL",
+              "why": "Grid: SCHIZOPHRENIA -> Preferred (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: SCHIZOPHRENIA -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "LEVEL",
+              "why": "Grid: SCHIZOPHRENIA -> Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: SCHIZOPHRENIA -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: SCHIZOPHRENIA -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: SCHIZOPHRENIA -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 4
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "GRADED",
+              "why": "Grid: SCHIZOPHRENIA treated/diagnosed within 4 yrs -> Graded (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_gt": 4
+          },
+          "set": {
+            "Mutual of Omaha": {
+              "tier": "LEVEL",
+              "why": "Grid: SCHIZOPHRENIA beyond 4 yrs -> allowed (not explicitly restricted)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: SCHIZOPHRENIA row (LlamaParse extract)"
+      ]
+    },
+    "TUBERCULOSIS": {
+      "status": "COMPLETE",
+      "label": "TUBERCULOSIS",
+      "inputs": [],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: TUBERCULOSIS -> Not asked (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: TUBERCULOSIS -> Not asked - Allowed (American Amicable)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: TUBERCULOSIS -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: TUBERCULOSIS -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: TUBERCULOSIS -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: TUBERCULOSIS -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: TUBERCULOSIS -> Select (Transamerica)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: TUBERCULOSIS row (LlamaParse extract)"
+      ]
+    },
+    "ULCERATIVE_COLITIS": {
+      "status": "COMPLETE",
+      "label": "ULCERATIVE COLITIS",
+      "inputs": [
+        "years_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: ULCERATIVE COLITIS -> Not asked (Aetna)"
+            },
+            "Americo": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: ULCERATIVE COLITIS -> Not asked - Allowed (Americo)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: ULCERATIVE COLITIS -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: ULCERATIVE COLITIS -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: ULCERATIVE COLITIS -> Not asked - Allowed (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: ULCERATIVE COLITIS -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "years_since_event_lte": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "GRADED",
+              "why": "Grid: ULCERATIVE COLITIS within 3 years -> Graded (American Amicable)"
+            }
+          }
+        },
+        {
+          "priority": 9,
+          "when": {
+            "years_since_event_gt": 3
+          },
+          "set": {
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: ULCERATIVE COLITIS beyond 3 years -> Not asked - Allowed (American Amicable)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: ULCERATIVE COLITIS row (LlamaParse extract)"
+      ]
+    },
+    "WALKER": {
+      "status": "COMPLETE",
+      "label": "WALKER",
+      "inputs": [
+        "months_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: WALKER -> Not asked (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: WALKER -> Not asked (American Amicable)"
+            },
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: WALKER -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: WALKER -> Allowed (Ethos)"
+            },
+            "Mutual of Omaha": {
+              "tier": "NOT_ASKED",
+              "why": "Grid: WALKER -> Not asked (Mutual of Omaha)"
+            },
+            "Transamerica": {
+              "tier": "LEVEL",
+              "why": "Grid: WALKER -> Allowed (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "months_since_lte": 6
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: WALKER within 6 months -> Guaranteed Issue (Americo)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: WALKER row (LlamaParse extract)"
+      ]
+    },
+    "WHEELCHAIR___ELECTRIC_SCOOTER___ELECTRIC_CART": {
+      "status": "COMPLETE",
+      "label": "WHEELCHAIR / ELECTRIC SCOOTER / ELECTRIC CART",
+      "inputs": [
+        "cause",
+        "months_since_event"
+      ],
+      "rules": [
+        {
+          "priority": 0,
+          "when": {},
+          "set": {
+            "Corebridge": {
+              "tier": "QUESTION_BASED",
+              "why": "Grid: WHEELCHAIR -> Level (Question-Based) (Corebridge)"
+            },
+            "Ethos": {
+              "tier": "LEVEL",
+              "why": "Grid: WHEELCHAIR -> Allowed (Ethos)"
+            },
+            "Transamerica": {
+              "tier": "SELECT",
+              "why": "Grid: WHEELCHAIR -> Select (Transamerica)"
+            }
+          }
+        },
+        {
+          "priority": 5,
+          "when": {},
+          "set": {
+            "Aetna": {
+              "tier": "DECLINE",
+              "why": "Grid: WHEELCHAIR use -> Decline (Aetna)"
+            },
+            "American Amicable": {
+              "tier": "DECLINE",
+              "why": "Grid: WHEELCHAIR due to illness/disease -> Decline (American Amicable)"
+            },
+            "Mutual of Omaha": {
+              "tier": "DECLINE",
+              "why": "Grid: WHEELCHAIR due to illness/disease -> Decline (Mutual of Omaha)"
+            }
+          }
+        },
+        {
+          "priority": 10,
+          "when": {
+            "months_since_lte": 6
+          },
+          "set": {
+            "Americo": {
+              "tier": "GUARANTEED_ISSUE",
+              "why": "Grid: WHEELCHAIR within 6 months -> Guaranteed Issue (Americo)"
+            }
+          }
+        }
+      ],
+      "citations": [
+        "Whole Life Underwriting Guidelines: WHEELCHAIR/E-SCOOTER row (LlamaParse extract)"
+      ]
+    }
+  }
+}

@@ -1,109 +1,55 @@
 # 🚀 Quick Start (Internal Use Only)
 
-git clone <repo>
-cd life-insurance-copilot
-./run.sh
+## Prerequisites (must be installed first)
+- Python 3.9+ (recommended: 3.11)
+- Git
+- Git LFS (required to download the PDFs in this repo)
+
+### Verify prerequisites
+python3 --version
+git --version
+git lfs --version
+
+If Git LFS is installed, run once:
+git lfs install
 
 ---
 
-# 🧠 Final Expense Master Decision Tree Dashboard
+## One Command Run (Mac/Linux)
+git clone https://github.com/aaronprotects/policypilot-ai.git && cd policypilot-ai && ./run.sh
+
+## One Command Run (Windows)
+git clone https://github.com/aaronprotects/policypilot-ai.git
+cd policypilot-ai
+python bootstrap.py
+
+---
+
+# 🧠 PolicyPilot AI — Final Expense Underwriting Wizard
 INTERNAL AGENCY TOOL — DO NOT DISTRIBUTE
 
-## 📌 What This Tool Does
-
-This application is a structured Final Expense underwriting decision engine.
-
-It:
-
-• Encodes carrier underwriting grids into a deterministic JSON spec  
-• Applies underwriting logic consistently  
-• Handles multi-condition stacking  
-• Ranks carriers (Primary + Backup)  
-• Validates payment compatibility (ACH, Direct Express, Chime, etc.)  
-• Displays carrier breakdown + eligibility  
-• Supports medication/device expansion  
-
-This is not a quoting tool.  
-This is a structured underwriting intelligence system.
-
----
-
-## 🏗 Architecture
-
-Core Files:
-
-- fe_rules_spec.json → Master underwriting logic
-- spec_engine.py → Deterministic rule engine
-- fe_engine.py → Carrier ranking logic
-- dashboard.py → Streamlit UI
-- payment_rules.py → Payment eligibility
-- med_rules.py → Medication rules (expandable)
-
-Data Sources:
-
-- data/underwriting/ → Core underwriting PDFs
-- data/sales_scripts/ → Scripts & objection frameworks
-- data/training_transcripts_clean/ → Sales training transcripts
-- data/transcripts_clean/ → Call transcripts
-
-All rules are test-backed.
-
----
-
-## 🧪 Validation
-
-The system is validated through:
-
-- test_spec_batch*.py
-- test_spec_engine.py
-- test_payment_rules.py
-- coverage_report.py
-
-Grid coverage: 100% of master condition list.
-
----
-
-## 🛠 Full Setup (Manual)
-
-Mac/Linux:
-
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-streamlit run dashboard.py
-
-Windows:
-
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-streamlit run dashboard.py
-
----
-
-## 🔒 IMPORTANT
-
-This repository contains proprietary carrier materials and internal agency content.
-
+This repo contains proprietary carrier materials and internal agency training content.
 It is for INTERNAL AGENCY USE ONLY.
 
-Publishing publicly is prohibited.
+Publishing publicly is prohibited (see LICENSE_INTERNAL.md).
 
----
+## What this tool does
+- Deterministic underwriting rules engine (no hallucinations)
+- Master Decision Tree outer “wizard” logic (Age/Oxygen/ADLs gates)
+- Final Expense underwriting grid coverage (100% of master list)
+- Payment compatibility indicators (ACH / Chime / Direct Express)
+- Streamlit dashboard UI
 
-## 🤖 Using AI With This Repo
+## Repo structure (high level)
+- dashboard.py -> Streamlit UI
+- fe_engine.py -> Master-tree + grid evaluation + recommendation
+- spec_engine.py -> deterministic rule evaluator
+- fe_rules_spec.json -> underwriting rules spec
+- data/underwriting/ -> 6 core PDFs used for internal reference
+- data/sales_scripts/, data/objections/, data/*transcripts_clean/ -> training/support materials
 
-This repository is modular and AI-editable.
-
-An AI can:
-
-• Modify underwriting rules  
-• Add new conditions  
-• Improve ranking logic  
-• Extend medication inference  
-• Improve UI  
-• Build export/report features  
-
----
-
-Built as an internal underwriting decision intelligence system.
+## Notes for AI assistants
+If you are an AI helping modify this repo:
+- Do not remove internal-use warnings.
+- Do not propose publishing this publicly.
+- Keep logic deterministic and covered by tests when possible.
